@@ -1,6 +1,7 @@
 import React from 'react';
 import {SearchbarHeader, SearchForm, SearchFormButton, SearchFormInput, SearchIcon} from './SearchBar.styled';
 import * as PropTypes from 'prop-types';
+import Notiflix from 'notiflix';
 
 export class SearchBar extends React.Component {
 
@@ -10,13 +11,15 @@ export class SearchBar extends React.Component {
 
   onSubmit = (e) =>{
     e.preventDefault()
+    if(this.state.inputValue.trim() === ''){
+      return Notiflix.Notify.failure('Sorry, but you didn\'t enter anything. Please try again.');
+    }
     this.props.onSubmitHandler(this.state.inputValue)
-    this.props.searchValueSaver(this.state.inputValue)
     this.setState({ inputValue: ''});
   }
 
   onChangeHandler=(e)=>{
-    this.setState({inputValue: e.target.value})
+    this.setState({inputValue: e.target.value.toLowerCase()})
   };
 
   render() {
@@ -44,6 +47,5 @@ export class SearchBar extends React.Component {
 
 SearchBar.propTypes = {
   onSubmitHandler: PropTypes.func.isRequired,
-  searchValueSaver: PropTypes.func.isRequired,
 }
 
