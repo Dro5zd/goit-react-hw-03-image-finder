@@ -1,12 +1,11 @@
 import './App.css';
-import {ImageGallery} from './components/2. ImageGallery/ImageGallery';
-import {Searchbar} from './components/1. Searchbar/Searchbar';
+import {ImageGallery} from './components/ImageGallery/ImageGallery';
+import {SearchBar} from './components/SearchBar/SearchBar';
 import {Component} from 'react';
 import {getImages} from './api/fetchImages';
 import Notiflix from 'notiflix';
-import {Loader} from './components/4. Loader/Loader';
-import {Button} from './components/5. Button/Button';
-import {Modal} from './components/6. Modal/Modal';
+import {Loader} from './components/Loader/Loader';
+import {Button} from './components/Button/Button';
 
 class App extends Component {
 
@@ -14,24 +13,12 @@ class App extends Component {
     images: [],
     totalHits: 0,
     isLoading: false,
-    isOpen: true,
     pageCounter: 1,
     searchValue: '',
-    smallImg: '',
   };
 
   searchValueSaver = (searchValue) => {
     this.setState({searchValue: searchValue});
-  };
-
-  modalOpenHandler = (e) => {
-    this.setState({smallImg: e.currentTarget.src});
-    this.setState({isOpen: !this.state.isOpen});
-  };
-
-  filterByImage = () => {
-    const filteredImg = this.state.images.find(imgObj => imgObj.webformatURL === this.state.smallImg) ?? 'photo';
-    return filteredImg.largeImageURL;
   };
 
   onSubmitHandler = (searchValue) => {
@@ -69,12 +56,8 @@ class App extends Component {
     return (
       <section>
         <Loader isLoading={this.state.isLoading}/>
-        <Modal
-          isOpen={this.state.isOpen}
-          openModalToggle={this.modalOpenHandler}
-          bigImg={this.filterByImage()}/>
-        <Searchbar onSubmitHandler={this.onSubmitHandler} searchValueSaver={this.searchValueSaver}/>
-        <ImageGallery images={this.state.images} isOpen={this.modalOpenHandler}/>
+        <SearchBar onSubmitHandler={this.onSubmitHandler} searchValueSaver={this.searchValueSaver}/>
+        <ImageGallery images={this.state.images}/>
         {this.state.totalHits !== this.state.images.length
           && <Button loadMoreHandler={this.loadMoreHandler}/>}
       </section>

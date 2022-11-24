@@ -6,11 +6,15 @@ export const OverlayModal = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: ${props => (props.modalClose === false ? 'flex' : 'none')};
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1200;
+  
+  &:hover{
+    cursor: zoom-out;
+  }
 `;
 
 export const ModalDiv = styled.div`
@@ -20,6 +24,6 @@ export const ModalDiv = styled.div`
   
   &:hover{
     transform: scale(1.03);
-    cursor: zoom-out;
+    cursor: default;
   }
 `;

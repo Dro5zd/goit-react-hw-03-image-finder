@@ -2,6 +2,7 @@ import {Bars} from 'react-loader-spinner';
 
 import React from 'react';
 import {LoaderWrapper} from './Loader.styled';
+import * as PropTypes from 'prop-types';
 
 export const Loader = ({isLoading}) => {
   return (
@@ -14,9 +15,12 @@ export const Loader = ({isLoading}) => {
         visible={isLoading}
       />
     </LoaderWrapper>
-
   );
 };
+
+Loader.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+}
 
 
 
