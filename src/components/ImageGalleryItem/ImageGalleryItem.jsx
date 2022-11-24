@@ -18,6 +18,7 @@ export class ImageGalleryItem extends React.Component {
       this.setState(({showModal}) => ({showModal: !showModal}));
     }
   };
+
   render() {
     let {smallImg, tag, bigImg} = this.props;
     return (
