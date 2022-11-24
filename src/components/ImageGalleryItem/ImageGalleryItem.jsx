@@ -37,6 +37,7 @@ export class ImageGalleryItem extends React.Component {
   }
 }
 
+
 ImageGalleryItem.propTypes = {
   smallImg: PropTypes.string.isRequired,
   bigImg: PropTypes.string.isRequired,
