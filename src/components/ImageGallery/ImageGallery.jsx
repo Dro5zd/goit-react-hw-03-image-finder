@@ -40,10 +40,12 @@ export class ImageGallery extends React.Component {
       try {
         const response = await getImages(this.props.searchValue, this.state.pageCounter);
         const {hits} = response.data;
-        this.setState(prevState => ({images: [...prevState.images, ...hits]}));
-        if (this.state.totalHits === this.state.images.length) {
-          return Notiflix.Notify.failure(`We're sorry, but you've reached the end of search results.`);
-        }
+        this.setState(prevState => ({images: [...prevState.images, ...hits]}), () => {
+          if (this.state.totalHits === this.state.images.length) {
+            return Notiflix.Notify.failure(`We're sorry, but you've reached the end of search results.`);
+          }
+        });
+
       } catch (error) {
         console.log(error);
       } finally {
